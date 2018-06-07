@@ -1,0 +1,22 @@
+{
+  "name": "heureka/php-circuit-breaker",
+  "description": "The purpose of this library is a detection of a services failures during maintenance, temporary external system failure or unexpected system difficulties and prevention of calling these services for some time or number of calls.",
+  "authors": [
+    {
+      "name": "Vyvoj Heureka.cz",
+      "email": "vyvoj@heureka.cz"
+    }
+  ],
+  "require": {
+    "php" : ">=7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~7"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "CircuitBreaker\\": ["src/", "tests/"]
+    }
+  }
+}
