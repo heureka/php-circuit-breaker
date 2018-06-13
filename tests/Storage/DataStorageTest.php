@@ -18,7 +18,7 @@ class DataStorageTest extends TestCase
     {
         parent::setUp();
         if (function_exists("apc_store")) {
-            $this->storageAdapter = new ApcCacheStorageAdapter('test', 60);
+            $this->storageAdapter = new ApcuCacheStorageAdapter('test', 60);
         } else {
             $this->storageAdapter = new DummyStorageAdapter();
         }
