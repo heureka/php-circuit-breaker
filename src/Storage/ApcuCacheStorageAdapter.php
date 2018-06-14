@@ -3,7 +3,7 @@
 namespace CircuitBreaker\Storage;
 
 
-class ApcCacheStorageAdapter implements StorageAdapterInterface
+class ApcuCacheStorageAdapter implements StorageAdapterInterface
 {
 
     /**
@@ -24,7 +24,7 @@ class ApcCacheStorageAdapter implements StorageAdapterInterface
      */
     public function __construct($keyPrefix, $ttl)
     {
-        $this->checkApcCacheExistence();
+        $this->checkApcuCacheExistence();
 
         $this->keyPrefix = $keyPrefix;
         $this->ttl = $ttl;
@@ -35,9 +35,9 @@ class ApcCacheStorageAdapter implements StorageAdapterInterface
      *
      * @throws StorageException
      */
-    protected function checkApcCacheExistence() {
-        if (!function_exists("apc_store")) {
-            throw new StorageException("APC extension not loaded.");
+    protected function checkApcuCacheExistence() {
+        if (!function_exists("apcu_fetch")) {
+            throw new StorageException("APCu extension not loaded.");
         }
     }
 
@@ -45,17 +45,10 @@ class ApcCacheStorageAdapter implements StorageAdapterInterface
      * @param string $key
      *
      * @return string
-     *
-     * @throws StorageException
      */
     public function load($key)
     {
-        $data = apc_fetch($this->keyPrefix . $key);
-        if ($data === false) {
-            throw new StorageException("Can not load data from APC Cache. Key: $key");
-        }
-
-        return $data;
+        return apcu_fetch($this->keyPrefix . $key);
     }
 
     /**
@@ -67,9 +60,9 @@ class ApcCacheStorageAdapter implements StorageAdapterInterface
      */
     public function save($key, $value)
     {
-        $result = apc_store($this->keyPrefix . $key, $value, $this->ttl);
+        $result = apcu_add($this->keyPrefix . $key, $value, $this->ttl);
         if ($result === false) {
-            throw new StorageException("Can not save data to APC Cache. Key: $key");
+            throw new StorageException("Can not save data to APCu Cache. Key: $key");
         }
     }
 

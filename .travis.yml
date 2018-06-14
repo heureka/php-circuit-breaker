@@ -4,4 +4,4 @@ php:
   - 7.1
 install:
   - make
-script: phpunit
+script: vendor/bin/phpunit tests
