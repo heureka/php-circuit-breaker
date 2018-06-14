@@ -59,7 +59,7 @@ $stopAttemptTime = 10; // How long it should wait for a next try. In seconds.
 $stopAttemptCount = 200; // How many attempts it should wait for a next try.
 
 $dataStorage = new \CircuitBreaker\Storage\DataStorage(
-    new \CircuitBreaker\Storage\ApcCacheStorageAdapter(), // APC extension must be installed. 
+    new \CircuitBreaker\Storage\ApcuCacheStorageAdapter(), // APC extension must be installed. 
     'serviceName' // Just for definition of key in the data storage (APC cache key).
 );
 
