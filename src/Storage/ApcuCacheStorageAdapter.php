@@ -60,7 +60,7 @@ class ApcuCacheStorageAdapter implements StorageAdapterInterface
      */
     public function save($key, $value)
     {
-        $result = apcu_add($this->keyPrefix . $key, $value, $this->ttl);
+        $result = apcu_store($this->keyPrefix . $key, $value, $this->ttl);
         if ($result === false) {
             throw new StorageException("Can not save data to APCu Cache. Key: $key");
         }
